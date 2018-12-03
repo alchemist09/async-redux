@@ -16,3 +16,27 @@ const selectedSubreddit = (state='reactjs', action) => {
   }
 }
 
+const posts = (
+  state = {
+    isFetching: false,
+    didInvalidate: false,
+    items: []
+  }, 
+  action) => {
+    switch(action.type) {
+      case INVALIDATE_SUBREDDIT:
+        return Object.assign({}, state, { didInvalidate: true})
+      case REQUEST_POSTS:
+        return Object.assign({}, state, { isFetching: true })
+      case RECEIVE_POSTS:
+        return Object.assign({}, state, {
+            isFetching: false,
+            didInvalidate: false,
+            items: action.posts,
+            lastUpdated: action.receivedAt
+          }    
+        )
+      default:
+        return state
+    }
+}
