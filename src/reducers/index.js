@@ -53,3 +53,10 @@ const postsBySubreddit = (state={}, action) => {
       return state
   }
 }
+
+const rootReducer = combineReducers({
+  postsBySubreddit,
+  selectedSubreddit
+})
+
+export default rootReducer
