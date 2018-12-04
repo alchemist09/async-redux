@@ -27,13 +27,11 @@ export const receivePosts = (subreddit, json) => ({
   receivedAt: Date.now()
 })
 
-export const fetchPosts = subreddit => {
-  return (dispatch) => {
-    dispatch(requestPosts(subreddit))
-    return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-      .then(response => response.json(),
-            error => console.log('An error occured while fetching posts.', error))
-      .then(json => dispatch(receivePosts(subreddit, json))
-    )
-  }
+export const fetchPosts = subreddit => dispatch => {
+  dispatch(requestPosts(subreddit))
+  return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+    .then(response => response.json(),
+          error => console.log('An error occured while fetching posts.', error))
+    .then(json => dispatch(receivePosts(subreddit, json))
+  )
 }
