@@ -46,3 +46,10 @@ export const shouldFetchPosts = (state, subreddit) => {
     return posts.didInvalidate
   }
 }
+
+export const fetchPostsIfNeeded = subreddit => (dispatch, getState) => {
+  if (shouldFetchPosts(getState(), subreddit)) {
+    return dispatch(fetchPosts(subreddit))
+  }
+  return Promise.resolve()
+}
