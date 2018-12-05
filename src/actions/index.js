@@ -35,3 +35,14 @@ export const fetchPosts = subreddit => dispatch => {
     .then(json => dispatch(receivePosts(subreddit, json))
   )
 }
+
+export const shouldFetchPosts = (state, subreddit) => {
+  const posts = state.postsBySubreddit[subreddit]
+  if (!posts) {
+    return true
+  } else if (posts.isFetching) {
+    return false
+  } else {
+    return posts.didInvalidate
+  }
+}
