@@ -9,6 +9,7 @@ import {
 
 import Picker from '../components/Picker';
 import Posts from '../components/Posts';
+import fetch from 'cross-fetch';
 
 class AsyncApp extends Component {
 
@@ -16,6 +17,11 @@ class AsyncApp extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleRefreshClick = this.handleRefreshClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch, selectedSubreddit } = this.props;
+    dispatch(fetchPostsIfNeeded(selectedSubreddit));
   }
 
   handleChange(nextSubreddit) {
