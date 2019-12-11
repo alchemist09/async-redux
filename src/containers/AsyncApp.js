@@ -15,11 +15,19 @@ class AsyncApp extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handleRefreshClick = this.handleRefreshClick.bind(this);
   }
 
   handleChange(nextSubreddit) {
     this.props.dispatch(selectSubreddit(nextSubreddit));
     this.props.dispatch(fetchPostsIfNeeded(nextSubreddit));
+  }
+
+  handleRefreshClick(e) {
+    e.preventDefault();
+    const { dispatch, selectedSubreddit } = this.props;
+    dispatch(invalidateSubreddit(selectedSubreddit));
+    dispatch(fetchPostsIfNeeded(selectedSubreddit));
   }
   
   render() {
