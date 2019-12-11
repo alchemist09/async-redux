@@ -11,6 +11,16 @@ import Picker from '../components/Picker';
 import Posts from '../components/Posts';
 
 class AsyncApp extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(nextSubreddit) {
+    this.props.dispatch(selectSubreddit(nextSubreddit));
+    this.props.dispatch(fetchPostsIfNeeded(nextSubreddit));
+  }
   
   render() {
     const { selectedSubreddit, posts, isFetching, didInvalidate } = this.props;
