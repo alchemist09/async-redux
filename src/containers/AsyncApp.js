@@ -9,7 +9,6 @@ import {
 
 import Picker from '../components/Picker';
 import Posts from '../components/Posts';
-import fetch from 'cross-fetch';
 
 class AsyncApp extends Component {
 
@@ -44,7 +43,7 @@ class AsyncApp extends Component {
   }
   
   render() {
-    const { selectedSubreddit, posts, isFetching, didInvalidate, lastUpdated } = this.props;
+    const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
     return (
       <div>
         <Picker 
