@@ -44,10 +44,35 @@ class AsyncApp extends Component {
   }
   
   render() {
-    const { selectedSubreddit, posts, isFetching, didInvalidate } = this.props;
+    const { selectedSubreddit, posts, isFetching, didInvalidate, lastUpdated } = this.props;
     return (
       <div>
-        
+        <Picker 
+          value={selectedSubreddit} 
+          onChange={this.handleChange} 
+          options={["cloud computing", "aws"]} 
+        />
+
+        <p>
+          { lastUpdated && (
+            <span>
+              Last updated at { new Date(lastUpdated).toLocaleTimeString()}.{' '}
+            </span>
+          )}
+          {
+            !isFetching && (
+              <button onClick={this.handleRefreshClick}>Refresh</button>
+            )
+          }
+        </p>
+
+        {isFetching && posts.length === 0 && <h2>Loading....</h2>}
+        {!isFetching && posts.length === 0 && <h2>Empty.</h2>}
+        {posts.length > 0 && (
+          <div style={{ opacity: isFetching ? 0.5 : 1 }}>
+            <Posts posts={posts} />
+          </div>
+        )}
       </div>
     )
   }
