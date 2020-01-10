@@ -16,5 +16,5 @@ export default class Posts extends Component {
 }
 
 Posts.propTyoes = {
-  posts: PropTypes.arrayOf.isRequired
+  posts: PropTypes.array.isRequired
 }
