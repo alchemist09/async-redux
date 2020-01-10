@@ -44,6 +44,7 @@ class AsyncApp extends Component {
   
   render() {
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
+    console.log("Last Updated: ", lastUpdated);
     return (
       <div>
         <Picker 
@@ -81,19 +82,19 @@ AsyncApp.propTypes = {
   selectedSubreddit: PropTypes.string.isRequired,
   posts: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  didIvalidate: PropTypes.bool,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  lastUpdated: PropTypes.number
 }
 
 const mapStateToProps = (state) => {
   const { selectedSubreddit, postsBySubreddit } = state;
-  const { isFetching, didInvalidate, items: posts } = postsBySubreddit[selectedSubreddit] || { isFetching: true, items: [] }
+  const { isFetching, lastUpdated, items: posts } = postsBySubreddit[selectedSubreddit] || { isFetching: true, items: [] }
 
   return {
     selectedSubreddit,
     posts,
     isFetching,
-    didInvalidate
+    lastUpdated
   }
 }
 
