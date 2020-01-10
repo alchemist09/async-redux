@@ -43,9 +43,9 @@ const posts = (
 
 const postsBySubreddit = (state={}, action) => {
   switch(action.type) {
-    case SELECT_SUBREDDIT:
     case INVALIDATE_SUBREDDIT:
     case REQUEST_POSTS:
+    case RECEIVE_POSTS:
       return Object.assign({}, state, {
         [action.subreddit]: posts(state[action.subreddit], action)
       })
